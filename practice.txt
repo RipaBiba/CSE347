@@ -1,0 +1,138 @@
+class Question(models.Model):
+    question_text = models.CharField(max_length = 200)
+    pub_date = models.DateTimeField('date published')
+
+    def _str_(self):
+        return self.question_text
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+
+    def _str_(self):
+        return self.choice_text
+		
+		
+<!--<div class ="container">
+            {% block content %}{% endblock content %}
+        </div>-->
+		
+		
+		
+		
+		{% extends "Bugijugi/base.html" %}
+{% block content %}
+    {% for post in posts %}
+        <h2>{{post.title}}</h2>
+        <p>By {{post.auther}} on {{post.date_posted}}</p>
+        <p>By {{post.content}}</p>
+    {% endfor %}
+{% endblock content %}
+
+
+
+   ## date_posted = models.DateTimeField(auto_now_add=True)
+
+   
+   
+  from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Post
+
+# Create your views here.
+#def page(request):
+    #return HttpResponse('<h1>WELCOME</h1>')
+
+#def about(request):
+    #return HttpResponse('<h1>About</h1>')
+
+posts = [
+    {
+        'author': 'Ripa',
+        'title': 'Practice',
+        'content' : 'First Try',
+        'date_posted': 'February 20, 2022'
+    },
+    {
+        'author': 'Fariha',
+        'title': 'Practice 02',
+        'content' : 'Second Try',
+        'date_posted': 'February 23, 2022'
+    }
+]
+
+def page(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'Bugijugi/home.html', context)
+
+
+def about(request):
+    return render(request, 'Bugijugi/about.html', {'title': 'About'})
+
+	
+	
+	
+messages.debug
+messages.info
+messages.warning
+messages.success
+messages.error
+
+
+<!--<form method="POST" >
+            {% csrf_token %}
+            <fieldset class="form-group" >
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>-->
+		
+		
+		
+		
+		
+		{% for post in posts %}
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted|date:"F d, Y"}}</small>
+          </div>
+          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
+    {% endfor %}
+		
+		
+		
+		
+<!--<!DOCTYPE html>
+<html>
+    <head>
+       <!-- <title>Hme</title>
+        {% if title %}
+        <title>Home- {{title}}</title>
+        {% else %}
+        <title>Sub Home</title>
+        {% endif %}
+
+    </head>
+    <body>
+        <!--<h1>Welcome home!</h1>
+        {% for post in posts %}
+            <h2>{{post.title}}</h2>
+            <p>By {{post.auther}} on {{post.date_posted}}</p>
+            <p>By {{post.content}}</p>
+        {% endfor %}
+    </body>
+</html>-->
+
+        {{ product }}
